@@ -33,6 +33,10 @@ const createDirectoryContents = async (templatePath, newProjectPath) => {
 
 fs.access(`${CURR_DIR}/${PROJECT_NAME}`, (err) => {
 	if (err) {
+		if (!PROJECT_NAME) {
+			console.log("Нужно указать название папки");
+			return;
+		}
 		fs.mkdirSync(`${CURR_DIR}/${PROJECT_NAME}`);
 		createDirectoryContents(`${__dirname}/src`, PROJECT_NAME);
 	} else {
