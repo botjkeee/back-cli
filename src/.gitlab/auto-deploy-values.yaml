@@ -1,0 +1,23 @@
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+service:
+  type: LoadBalancer
+  externalPort: 80
+
+livenessProbe:
+  path: '/healthz'
+readinessProbe:
+  path: '/healthz'
+
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 1
+
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 100
